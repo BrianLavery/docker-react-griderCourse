@@ -1,0 +1,22 @@
+version: '3'
+services:
+  react-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+  tests:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    command: ["npm", "run", "test"]
+
+# Have to add a full path for ubuntu in the 'volumes' section - see link on question below
+# https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11437076#questions/17049146
